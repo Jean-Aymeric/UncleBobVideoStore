@@ -46,14 +46,10 @@ public class Statement {
     }
 
     private String createRentalLine(Rental rental) {
-        String rentalLineText = "";
-        double rentalAmount = 0;
-
-        rentalAmount = determineAmount(rental);
-        rentalLineText = "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(rentalAmount) + "\n";
+        double rentalAmount = determineAmount(rental);
         determineFrequentRenterPoints(rental);
         totalAmount += rentalAmount;
-        return rentalLineText;
+        return formatRentalLines(rental, rentalAmount);
     }
 
     private static double determineAmount(Rental rental) {
@@ -69,11 +65,13 @@ public class Statement {
     }
 
     private void determineFrequentRenterPoints(Rental rental) {
-        frequentRenterPoints++;
-        if (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE
-                && rental.getDaysRented() > 1) {
-            frequentRenterPoints++;
-        }
+        boolean bonusIsEarned = (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE)
+                && (rental.getDaysRented() > 1);
+        frequentRenterPoints += bonusIsEarned ? 2 : 1;
+    }
+
+    private static String formatRentalLines(Rental rental, double rentalAmount) {
+        return MessageFormat.format("\t{0}\t{1}\n", rental.getTitle(), String.valueOf(rentalAmount));
     }
 
     private String createFooter() {

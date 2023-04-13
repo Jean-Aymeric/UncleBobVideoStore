@@ -16,4 +16,8 @@ public class Rental {
 
     private Movie movie;
     private int daysRented;
+
+    public String getTitle() {
+        return this.movie.getTitle();
+    }
 }
