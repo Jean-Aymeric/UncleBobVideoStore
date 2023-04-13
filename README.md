@@ -101,8 +101,8 @@ frequentRenterPoints = 0;
 - Do not pass `thisAmount` variable
 - Rename variable `thisAmount` to `rentalAmount` in method `determineAmount` and `createRentalLine`
 - Extract `frequentRenterPoints` login into method `determineFrequentRenterPoints`
-- Modify method to make it simpler and return value without side effect
 
+- Modify method to make it simpler and return value without side effect
 ## Step 8
 ### Activity
 - Extract condition in `determineFrequentRenterPoints` method  into a variable

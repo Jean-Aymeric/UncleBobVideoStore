@@ -47,36 +47,33 @@ public class Statement {
 
     private String createRentalLine(Rental rental) {
         String rentalLineText = "";
-        double thisAmount = 0;
+        double rentalAmount = 0;
 
+        rentalAmount = determineAmount(rental);
+        rentalLineText = "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(rentalAmount) + "\n";
+        determineFrequentRenterPoints(rental);
+        totalAmount += rentalAmount;
+        return rentalLineText;
+    }
+
+    private static double determineAmount(Rental rental) {
         switch (rental.getMovie().getPriceCode()) {
             case Movie.REGULAR:
-                thisAmount += 2;
-                if (rental.getDaysRented() > 2) {
-                    thisAmount += (rental.getDaysRented() - 2) * 1.5;
-                }
-                break;
+                return 2 + ((rental.getDaysRented() > 2) ? (rental.getDaysRented() - 2) * 1.5 : 0);
             case Movie.NEW_RELEASE:
-                thisAmount += rental.getDaysRented() * 3;
-                break;
+                return rental.getDaysRented() * 3;
             case Movie.CHILDRENS:
-                thisAmount += 1.5;
-                if (rental.getDaysRented() > 3) {
-                    thisAmount += (rental.getDaysRented() - 3) * 1.5;
-                }
-                break;
+                return 1.5 + ((rental.getDaysRented() > 3) ? (rental.getDaysRented() - 3) * 1.5 : 0);
         }
-        rentalLineText = "\t" + rental.getMovie().getTitle() + "\t"
-                + String.valueOf(thisAmount) + "\n";
+        return 0;
+    }
 
+    private void determineFrequentRenterPoints(Rental rental) {
         frequentRenterPoints++;
         if (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE
                 && rental.getDaysRented() > 1) {
             frequentRenterPoints++;
         }
-
-        totalAmount += thisAmount;
-        return rentalLineText;
     }
 
     private String createFooter() {
