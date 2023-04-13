@@ -9,12 +9,12 @@ public class VideoStoreTest {
 
     private static final double DELTA = 1e-15;
     private Statement statement;
-    private final Movie newReleaseMovie1 = new Movie("New Release 1", Movie.NEW_RELEASE);
-    private final Movie newReleaseMovie2 = new Movie("New Release 2", Movie.NEW_RELEASE);
-    private final Movie newChildrenMovie1 = new Movie("New Children 1", Movie.CHILDRENS);;
-    private final Movie newRegular1 = new Movie("New Regular 1", Movie.REGULAR);
-    private final Movie newRegular2 = new Movie("New Regular 2", Movie.REGULAR);
-    private final Movie newRegular3 = new Movie("New Regular 3", Movie.REGULAR);
+    private final Movie newReleaseMovie1 = new ReleaseMovie("New Release 1");
+    private final Movie newReleaseMovie2 = new ReleaseMovie("New Release 2");
+    private final Movie newChildrenMovie1 = new ChildrenMovie("New Children 1");;
+    private final Movie newRegular1 = new MovieRegular("New Regular 1");
+    private final Movie newRegular2 = new MovieRegular("New Regular 2");
+    private final Movie newRegular3 = new MovieRegular("New Regular 3");
 
     @BeforeEach
     protected void setUp() {

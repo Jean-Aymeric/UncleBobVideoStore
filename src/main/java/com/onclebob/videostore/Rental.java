@@ -13,14 +13,6 @@ public class Rental {
         return movie.determineAmount(daysRented);
     }
 
-    public int getDaysRented() {
-        return daysRented;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
     public String getTitle() {
         return this.movie.getTitle();
     }
