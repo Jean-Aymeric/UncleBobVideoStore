@@ -1,16 +1,16 @@
 package com.onclebob.videostore;
 
 public class Rental {
-    private Movie movie;
-    private int daysRented;
+    private final Movie movie;
+    private final int daysRented;
 
-    public Rental(Movie movie, int daysRented) {
+    public Rental(final Movie movie, final int daysRented) {
         this.movie = movie;
         this.daysRented = daysRented;
     }
 
     double determineAmount() {
-        return movie.determineAmount(daysRented);
+        return this.movie.determineAmount(this.daysRented);
     }
 
     public String getTitle() {
@@ -18,7 +18,7 @@ public class Rental {
     }
 
     public int determineFrequentRenterPoints() {
-        return movie.determineFrequentRenterPoints(daysRented);
+        return this.movie.determineFrequentRenterPoints(this.daysRented);
     }
 
 }

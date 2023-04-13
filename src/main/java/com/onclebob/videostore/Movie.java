@@ -1,15 +1,14 @@
 package com.onclebob.videostore;
 
 public abstract class Movie {
-    private String title;
-    protected int priceCode;
+    private final String title;
 
-    public Movie(String title) {
+    public Movie(final String title) {
         this.title = title;
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public abstract int determineFrequentRenterPoints(int daysRented);
