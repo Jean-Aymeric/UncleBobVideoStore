@@ -1,8 +1,8 @@
 package com.onclebob.videostore;
 
 import java.text.MessageFormat;
-import java.util.Vector;
 import java.util.Enumeration;
+import java.util.Vector;
 
 public class Statement {
     private final String customerName;
@@ -12,6 +12,10 @@ public class Statement {
 
     public Statement(final String customerName) {
         this.customerName = customerName;
+    }
+
+    private static String formatRentalLines(final Rental rental, final double rentalAmount) {
+        return MessageFormat.format("\t{0}\t{1}\n", rental.getTitle(), String.valueOf(rentalAmount));
     }
 
     public void addRental(final Rental rental) {
@@ -51,10 +55,6 @@ public class Statement {
         this.frequentRenterPoints += rental.determineFrequentRenterPoints();
         this.totalAmount += rentalAmount;
         return Statement.formatRentalLines(rental, rentalAmount);
-    }
-
-    private static String formatRentalLines(final Rental rental, final double rentalAmount) {
-        return MessageFormat.format("\t{0}\t{1}\n", rental.getTitle(), String.valueOf(rentalAmount));
     }
 
     private String createFooter() {
