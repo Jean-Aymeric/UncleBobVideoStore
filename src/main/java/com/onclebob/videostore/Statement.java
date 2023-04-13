@@ -46,28 +46,10 @@ public class Statement {
     }
 
     private String createRentalLine(Rental rental) {
-        double rentalAmount = determineAmount(rental);
-        determineFrequentRenterPoints(rental);
+        double rentalAmount = rental.determineAmount();
+        frequentRenterPoints += rental.determineFrequentRenterPoints();
         totalAmount += rentalAmount;
         return formatRentalLines(rental, rentalAmount);
-    }
-
-    private static double determineAmount(Rental rental) {
-        switch (rental.getMovie().getPriceCode()) {
-            case Movie.REGULAR:
-                return 2 + ((rental.getDaysRented() > 2) ? (rental.getDaysRented() - 2) * 1.5 : 0);
-            case Movie.NEW_RELEASE:
-                return rental.getDaysRented() * 3;
-            case Movie.CHILDRENS:
-                return 1.5 + ((rental.getDaysRented() > 3) ? (rental.getDaysRented() - 3) * 1.5 : 0);
-        }
-        return 0;
-    }
-
-    private void determineFrequentRenterPoints(Rental rental) {
-        boolean bonusIsEarned = (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE)
-                && (rental.getDaysRented() > 1);
-        frequentRenterPoints += bonusIsEarned ? 2 : 1;
     }
 
     private static String formatRentalLines(Rental rental, double rentalAmount) {
